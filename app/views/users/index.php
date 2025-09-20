@@ -18,10 +18,25 @@
         h1 {
             text-align: center;
             color: #fff;
-            margin-bottom: 30px;
+            margin-bottom: 20px; /* space before search */
             font-size: 32px;
             font-weight: 700;
             letter-spacing: 1px;
+        }
+
+        .search-form {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px; 
+        }
+
+        .search-form input {
+            width: 300px; 
+        }
+
+        .search-form button {
+            padding: 10px 15px;
         }
 
         table {
@@ -135,7 +150,7 @@
 </head>
 <body>
     <h1>Students Info</h1>
-    <form action="<?=site_url('users');?>" method="get" class="col-sm-4 float-end d-flex">
+    <form action="<?=site_url('users');?>" method="get" class="col-sm-4 float-end d-flex" class="search-form">
 		<?php
 		$q = '';
 		if(isset($_GET['q'])) {
