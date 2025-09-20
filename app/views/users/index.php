@@ -134,6 +134,7 @@
     </style>
 </head>
 <body>
+    <h1>Students Info</h1>
     <form action="<?=site_url('users');?>" method="get" class="col-sm-4 float-end d-flex">
 		<?php
 		$q = '';
@@ -144,7 +145,6 @@
         <input class="form-control me-2" name="q" type="text" placeholder="Search" value="<?=html_escape($q);?>">
         <button type="submit" class="btn btn-primary" type="button">Search</button>	
 	</form>
-    <h1>Students Info</h1>
     <table>
         <tr>
             <th>ID</th>
