@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Students Info</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
         body {
             font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -133,6 +134,16 @@
     </style>
 </head>
 <body>
+    <form action="<?=site_url('users');?>" method="get" class="col-sm-4 float-end d-flex">
+		<?php
+		$q = '';
+		if(isset($_GET['q'])) {
+			$q = $_GET['q'];
+		}
+		?>
+        <input class="form-control me-2" name="q" type="text" placeholder="Search" value="<?=html_escape($q);?>">
+        <button type="submit" class="btn btn-primary" type="button">Search</button>	
+	</form>
     <h1>Students Info</h1>
     <table>
         <tr>
@@ -141,19 +152,20 @@
             <th>Email</th>
             <th>Action</th>
         </tr>
-        <?php foreach (html_escape($users) as $user): ?>
+        <?php foreach ($user as $users): ?>
         <tr>
-            <td><?=$user['id']; ?></td>
-            <td><?=$user['username']; ?></td>
-            <td><?=$user['email']; ?></td>
+            <td><?=$users['id']; ?></td>
+            <td><?=$users['username']; ?></td>
+            <td><?=$users['email']; ?></td>
             <td>
-                <a href="<?=site_url('/users/update/'.$user['id']);?>">Update</a>
-                <a href="<?=site_url('/users/delete/'.$user['id']);?>">Delete</a>
+                <a href="<?=site_url('/users/update/'.$users['id']);?>">Update</a>
+                <a href="<?=site_url('/users/delete/'.$users['id']);?>">Delete</a>
             </td>
         </tr>
         <?php endforeach; ?>
     </table>
-
+    <?php
+	echo $page;?>
     <div class="button-container">
         <a href="<?=site_url('users/create'); ?>" class="btn-create">+ Create New User</a>
     </div>
