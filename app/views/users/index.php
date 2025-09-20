@@ -18,7 +18,7 @@
         h1 {
             text-align: center;
             color: #fff;
-            margin-bottom: 20px; /* space before search */
+            margin-bottom: 20px; 
             font-size: 32px;
             font-weight: 700;
             letter-spacing: 1px;
@@ -28,13 +28,15 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 12px;              /* space between input and button */
-            margin-bottom: 30px;    /* space before the table */
+            gap: 12px;              
+            margin-bottom: 30px;  
+            margin-right: 30px;
+            float: right;  
         }
 
         .search-form input {
-            width: 350px;           /* make search box wider */
-            padding: 10px 12px;     /* better spacing inside */
+            width: 350px;           
+            padding: 10px 12px;     
             border-radius: 6px;
             border: 1px solid #ccc;
             font-size: 15px;
@@ -84,7 +86,6 @@
             transition: background-color 0.3s ease;
         }
 
-        /* Action links */
         a {
             margin: 0 6px;
             text-decoration: none;
@@ -113,14 +114,13 @@
             background: #b02a37;
         }
 
-        /* Button container */
+        
         .button-container {
             width: 100%;
             text-align: center;
             margin-top: 15px;
         }
 
-        /* Create button */
         .btn-create {
             display: inline-block;
             padding: 12px 22px;
@@ -138,7 +138,7 @@
             transform: translateY(-2px);
         }
 
-        /* Responsive */
+      
         @media (max-width: 768px) {
             table {
                 width: 100%;
