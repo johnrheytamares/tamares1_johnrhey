@@ -27,18 +27,25 @@
         .search-form {
             display: flex;
             justify-content: center;
-            gap: 10px;
-            margin-bottom: 30px; 
+            align-items: center;
+            gap: 12px;              /* space between input and button */
+            margin-bottom: 30px;    /* space before the table */
         }
 
         .search-form input {
-            width: 300px; 
+            width: 350px;           /* make search box wider */
+            padding: 10px 12px;     /* better spacing inside */
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 15px;
         }
 
         .search-form button {
-            padding: 10px 15px;
+            padding: 10px 18px;
+            font-size: 15px;
+            font-weight: 600;
+            border-radius: 6px;
         }
-
         table {
             width: 90%;
             margin: 0 auto 25px;
@@ -150,7 +157,7 @@
 </head>
 <body>
     <h1>Students Info</h1>
-    <form action="<?=site_url('users');?>" method="get" class="col-sm-4 float-end d-flex" class="search-form">
+    <form action="<?=site_url('users');?>" method="get" class="col-sm-4 float-end d-flex search-form" class="search-form">
 		<?php
 		$q = '';
 		if(isset($_GET['q'])) {
