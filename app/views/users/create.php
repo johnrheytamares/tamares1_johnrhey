@@ -122,11 +122,11 @@
     <form id="user-form" action="<?=site_url('users/create/')?>" method="POST">
       <div class="form-group">
         <label for="username">Username</label>
-        <input type="text" id="username" name="username" placeholder="Enter your username" required class="form-input"/>
+        <input type="text" id="username" name="username" placeholder="Enter your username" required class="form-input" value="<?= isset($username) ? html_escape($username) : '' ?>"/>
       </div>
       <div class="form-group">
         <label for="email">Email</label>
-        <input type="email" id="email" name="email" placeholder="Enter your email" required class="form-input"/>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required class="form-input" value="<?= isset($email) ? html_escape($email) : '' ?>"/>
         <div id="email-error" class="error-message">Please enter a valid email address.</div>
       </div>
       <button type="submit" class="btn-submit">Create User</button>

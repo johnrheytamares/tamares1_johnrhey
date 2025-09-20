@@ -152,7 +152,7 @@
             <th>Email</th>
             <th>Action</th>
         </tr>
-        <?php foreach ($user as $users): ?>
+        <?php foreach (html_escape($user) as $users): ?>
         <tr>
             <td><?=$users['id']; ?></td>
             <td><?=$users['username']; ?></td>
