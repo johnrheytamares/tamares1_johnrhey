@@ -162,7 +162,7 @@ public function update($id)
             }
         }
 
-        $this->call->view('');
+        $this->call->view('/');
     }
 
 
