@@ -258,7 +258,7 @@
             <form method="post" action="/auth/login" class="inputBox">
                 <input type="text" placeholder="Username" name="username">
                 <input type="password" placeholder="Password" name="password">
-                <button type="submit" id="btn">Login</button>
+                <button type="submit"  id="btn"><a href="<?= site_url('auth/register'); ?>">Login</a></button>
             </form>
             <div class="group">
                 <p style="font-size: 0.9em; text-align: center;">
