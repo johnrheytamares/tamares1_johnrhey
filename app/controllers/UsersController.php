@@ -25,9 +25,6 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
         }
 
         $q = '';
-        if($q !== '') {
-            
-        }
         if(isset($_GET['q']) && !empty($_GET['q'])) {
             $q = trim($this->io->get('q'));
         }
