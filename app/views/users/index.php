@@ -271,19 +271,20 @@
           <th>Role</th>
           <th>Action</th>
         </tr>
-        <?php foreach (html_escape($user) as $users): ?>
+        <?php foreach ($users as $user): ?>
         <tr>
-          <td><?=$users['id']; ?></td>
-          <td><?=$users['username']; ?></td>
-          <td><?=$users['email']; ?></td>
+          <td><?=html_escape($user['id']); ?></td>
+          <td><?=html_escape($user['username']); ?></td>
+          <td><?=html_escape($user['email']); ?></td>
           <td>*******</td>
-          <td><?=$users['role']; ?></td>
+          <td><?=html_escape($user['role']); ?></td>
           <td>
-            <a href="<?=site_url('/users/update/'.$users['id']);?>">Update</a>
-            <a href="<?=site_url('/users/delete/'.$users['id']);?>">Delete</a>
+            <a href="<?=site_url('/users/update/'.$user['id']);?>">Update</a>
+            <a href="<?=site_url('/users/delete/'.$user['id']);?>">Delete</a>
           </td>
         </tr>
         <?php endforeach; ?>
+
       </table>
 
       <?php echo $page; ?>

@@ -38,9 +38,9 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 
             $records_per_page = 10;
 
-            $user = $this->UsersModel->page($q, $records_per_page, $page);
-            $data['users'] = $user['records'];
-            $total_rows = $user['total_rows'];
+            $users = $this->UsersModel->page($q, $records_per_page, $page);
+            $data['users'] = $users['records'];
+            $total_rows = $users['total_rows'];
 
             $this->pagination->set_options([
                 'first_link'     => '⏮ First',
@@ -54,8 +54,8 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
             $data['page'] = $this->pagination->paginate();
 
             $this->call->view('users/index', [
-                'user' => $user,
-                'logged_in_user' => $_SESSION['user'] ?? null,
+                'users' => $users,
+                'logged_in_user' => $_SESSION['users'] ?? null,
                 'page' => $data['page'] ?? null
             ]);       
     }
