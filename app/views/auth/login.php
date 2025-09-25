@@ -239,15 +239,34 @@
 		<img src="/public/images/trees.png" class="trees">
         <div class="login">
             <h2>Login</h2>
+
+            <?php if (!empty($error)): ?>
+                <div style="
+                    background: rgba(255,0,0,0.1);
+                    color: #d64c42;
+                    padding: 10px;
+                    border: 1px solid #d64c42;
+                    border-radius: 5px;
+                    margin-bottom: 15px;
+                    text-align: center;
+                    font-size: 0.95em;
+                ">
+                    <?= $error ?>
+                </div>
+            <?php endif; ?>
+
             <form method="post" action="/auth/login" class="inputBox">
                 <input type="text" placeholder="Username" name="username">
                 <input type="password" placeholder="Password" name="password">
                 <button type="submit" id="btn">Login</button>
             </form>
             <div class="group">
-                <p style="font-size: 0.9em; text-align: center;">Don't have an account? <a href="<?= site_url('auth/register'); ?>">Register here</a></p>
+                <p style="font-size: 0.9em; text-align: center;">
+                    Don't have an account? <a href="<?= site_url('auth/register'); ?>">Register here</a>
+                </p>
             </div>
         </div>
+
 	</section>
 </body>
 </html>

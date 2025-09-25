@@ -25,9 +25,6 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
         }
 
         $q = '';
-        if($q !== '') {
-            
-        }
         if(isset($_GET['q']) && !empty($_GET['q'])) {
             $q = trim($this->io->get('q'));
         }
@@ -66,7 +63,7 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
             ];
 
             if($this->UsersModel->insert($data)){
-                redirect();
+                redirect('/users');
             } else {
                 echo 'Failed to create user.';
             }
@@ -161,47 +158,53 @@ public function update($id)
             ];
 
             if ($this->UsersModel->insert($data)) {
-                redirect('auth/login');
+                redirect('/auth/login');
             }
         }
 
-        $this->call->view('auth/register');
+        $this->call->view('');
     }
 
 
-    public function login()
-    {
-        $this->call->library('auth');
+        public function login()
+        {
+            $this->call->library('auth');
 
-        if ($this->io->method() == 'post') {
-            $username = $this->io->post('username');
-            $password = $this->io->post('password');
+            $error = null; // prepare error variable
 
-            if ($this->auth->login($username, $password)) {
+            if ($this->io->method() == 'post') {
+                $username = $this->io->post('username');
+                $password = $this->io->post('password');
 
-                // Fetch user info after successful login
                 $this->call->model('UsersModel');
-                $user = $this->UsersModel->get_user_by_username($username); // Create this function in UsersModel if not exists
+                $user = $this->UsersModel->get_user_by_username($username);
 
-                // Set session
-                $_SESSION['user'] = [
-                    'id'       => $user['id'],
-                    'username' => $user['username'],
-                    'role'     => $user['role']
-                ];
+                if ($user) {
+                    if ($this->auth->login($username, $password)) {
+                        // Set session
+                        $_SESSION['user'] = [
+                            'id'       => $user['id'],
+                            'username' => $user['username'],
+                            'role'     => $user['role']
+                        ];
 
-                if($user['role'] == 'admin') {
-                    redirect('/users');
+                        if ($user['role'] == 'admin') {
+                            redirect('/users');
+                        } else {
+                            redirect('/users/dashboard');
+                        }
+                    } else {
+                        $error = "Incorrect password!";
+                    }
                 } else {
-                    redirect('/users/dashboard');
+                    $error = "Username not found!";
                 }
-            } else {
-                echo 'Login failed!';
             }
+
+            // Pass error to view
+            $this->call->view('auth/login', ['error' => $error]);
         }
 
-        $this->call->view('auth/login');
-    }
 
 
     public function dashboard()
