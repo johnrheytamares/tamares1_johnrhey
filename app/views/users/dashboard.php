@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Students Info</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
@@ -27,6 +27,7 @@
       min-height: 100vh;
       overflow: hidden;
       padding: 20px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
     }
 
     section .bg, section .trees {
@@ -243,15 +244,7 @@
     <img src="/public/images/trees.png" class="trees">
 
     <div class="glass-container">
-      <h1>Students Info</h1>
-
-        <?php if(!empty($logged_in_user)): ?>
-        <p style="color: blue;">
-        Logged in as: <?= html_escape($logged_in_user['username']); ?> (<?= html_escape($logged_in_user['role']); ?>)
-        </p>
-        <?php else: ?>
-        <p style="color: red;">Logged in user not found</p>
-        <?php endif; ?>
+      <h1>Users Dashboard</h1>
 
       <div class="top-bar">
         <a href="<?=site_url('auth/logout'); ?>"><button class="logout-btn">Logout</button></a>
@@ -267,8 +260,6 @@
           <th>ID</th>
           <th>Name</th>
           <th>Email</th>
-          <th>Password</th>
-          <th>Role</th>
           <th>Action</th>
         </tr>
         <?php foreach (html_escape($user) as $users): ?>
@@ -276,8 +267,6 @@
           <td><?=$users['id']; ?></td>
           <td><?=$users['username']; ?></td>
           <td><?=$users['email']; ?></td>
-          <td>*******</td>
-          <td><?=$users['role']; ?></td>
           <td>
             <a href="<?=site_url('/users/update/'.$users['id']);?>">Update</a>
             <a href="<?=site_url('/users/delete/'.$users['id']);?>">Delete</a>
