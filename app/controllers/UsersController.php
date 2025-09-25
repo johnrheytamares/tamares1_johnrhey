@@ -53,8 +53,12 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
             $this->pagination->initialize($total_rows, $records_per_page, $page, 'users?q='.$q);
             $data['page'] = $this->pagination->paginate();
 
-            $this->call->view('users/index', $data);
-        }
+            $this->call->view('users/index', [
+                'user' => $user,
+                'logged_in_user' => $_SESSION['user'] ?? null,
+                'page' => $data['page'] ?? null
+            ]);       
+    }
 
     public function create()
     {
