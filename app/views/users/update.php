@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -49,7 +49,6 @@
       display: flex;
       flex-direction: column;
       gap: 20px;
-      
       box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
     }
 
@@ -160,6 +159,17 @@
       80%  { transform: translateX(-20px) rotate(45deg); }
       100% { top: 110%; transform: translateX(20px) rotate(225deg); }
     }
+
+    /* Password toggle eye */
+    .toggle-eye {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      font-size: 1.2em;
+      color: #8f2c24;
+    }
   </style>
 </head>
 <body>
@@ -201,12 +211,14 @@
               </select>
           </div>
 
-          <div class="form-group">
+          <div class="form-group" style="position: relative;">
               <input 
                   type="password" 
+                  id="password" 
                   name="password" 
                   placeholder="New Password (leave blank if unchanged)"
               >
+              <span id="togglePassword" class="toggle-eye">👁</span>
           </div>
       <?php endif; ?>
 
@@ -215,5 +227,18 @@
       <a href="<?=site_url('/users');?>" class="btn-return">Return to Home</a>
     </div>
   </section>
+
+  <script>
+    const togglePassword = document.querySelector('#togglePassword');
+    const password = document.querySelector('#password');
+
+    if(togglePassword && password){
+      togglePassword.addEventListener('click', function () {
+        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+        password.setAttribute('type', type);
+        this.textContent = type === 'password' ? '👁' : '🙈';
+      });
+    }
+  </script>
 </body>
 </html>
