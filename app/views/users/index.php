@@ -402,7 +402,10 @@
     <img src="/public/images/trees.png" class="trees">
 
     <div class="glass-container">
-      <h1>Students Info</h1>
+      <h2>
+    <?= ($logged_in_user['role'] === 'admin') ? 'Admin Dashboard' : 'User Dashboard'; ?>
+      </h2>
+
 
       <?php if(!empty($logged_in_user)): ?>
         <div class="user-status">
