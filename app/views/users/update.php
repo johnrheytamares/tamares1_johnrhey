@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Update User</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     * {
       margin: 0;
@@ -78,6 +79,15 @@
     .form-group select {
       background: #fff;
       color: #333;
+    }
+    .toggle-password {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-80%);
+      cursor: pointer;
+      font-size: 1.2em;
+      color: #8f2c24;
     }
 
     .btn-submit {
@@ -211,15 +221,10 @@
               </select>
           </div>
 
-          <div class="form-group" style="position: relative;">
-              <input 
-                  type="password" 
-                  id="password" 
-                  name="password" 
-                  placeholder="New Password (leave blank if unchanged)"
-              >
-              <span id="togglePassword" class="toggle-eye">👁</span>
-          </div>
+        <div class="form-group" style="position: relative;">
+          <input type="password" placeholder="Password" name="password" id="password" required>
+          <i class="fa-solid fa-eye toggle-password" id="togglePassword"></i>
+        </div>
       <?php endif; ?>
 
         <button type="submit" class="btn-submit">Update User</button>
@@ -232,13 +237,13 @@
     const togglePassword = document.querySelector('#togglePassword');
     const password = document.querySelector('#password');
 
-    if(togglePassword && password){
-      togglePassword.addEventListener('click', function () {
-        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-        password.setAttribute('type', type);
-        this.textContent = type === 'password' ? '👁' : '🙈';
-      });
-    }
+    togglePassword.addEventListener('click', function () {
+      const type = password.type === 'password' ? 'text' : 'password';
+      password.type = type;
+
+      this.classList.toggle('fa-eye');
+      this.classList.toggle('fa-eye-slash');
+    });
   </script>
 </body>
 </html>

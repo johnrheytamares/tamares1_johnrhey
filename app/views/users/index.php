@@ -54,7 +54,7 @@
       border-radius: 20px;
       box-shadow: 0 25px 50px rgba(0,0,0,0.1);
       color: #fff;
-      z-index: 2;
+      z-index: 200;
     }
 
     .glass-container h1 {
@@ -205,53 +205,216 @@
     }
 
     .btn-create {
-      display: inline-block;
-      padding: 12px 20px;
-      border-radius: 10px;
-      background: linear-gradient(to right, #28a745, #20c997);
+      width: 50%;
+      padding: 15px;
+      border: none;
+      background: #8f2c24;
       color: #fff;
-      font-weight: bold;
-      font-size: 15px;
-      text-decoration: none;
-      transition: all 0.3s ease;
+      font-size: 1.25em;
+      font-weight: 500;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
     }
 
     .btn-create:hover {
-      background: linear-gradient(to right, #218838, #198754);
+      background: #d64c42;
       transform: translateY(-2px);
     }
 
-    @media (max-width: 768px) {
-      .search-form input {
-        width: 160px;
-      }
-      table {
-        width: 100%;
-      }
-      th, td {
-        padding: 10px;
-      }
-      .btn-create {
-        width: 90%;
-      }
+    .user-status {
+          background: #f0f4ff;
+          border: 1px solid #d0d7ff;
+          padding: 10px 15px;
+          border-radius: 8px;
+          display: inline-block;
+          font-family: Arial, sans-serif;
+          color: #8f2c24;
+          font-size: 14px;
+        }
+
+        .user-status strong {
+          font-weight: 600;
+        }
+
+        .user-status .username {
+          color: #0d47a1;
+          font-weight: 500;
+        }
+
+        .user-status .role {
+          font-size: 13px;
+          color: #555;
+        }
+
+        .user-status.error {
+          background: #ffeaea;
+          border: 1px solid #f5bcbc;
+          color: #d32f2f;
+        }
+
+
+            /* Responsive table container */
+        .table-responsive {
+          width: 100%;
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+          border-radius: 16px;
+          margin-bottom: 20px;
+        }
+
+        /* Adjust search + logout alignment on mobile */
+        @media (max-width: 768px) {
+          .top-bar {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 15px;
+          }
+
+          .search-form {
+            width: 100%;
+            justify-content: space-between;
+          }
+
+          .search-form input {
+            flex: 1;
+            min-width: 0;
+          }
+
+          table {
+            font-size: 13px;
+          }
+
+          th, td {
+            padding: 8px;
+          }
+
+          .btn-create {
+            width: 100%;
+            font-size: 1em;
+          }
+        }
+
+        .pagination-container {
+          display: flex;
+          justify-content: center;
+          margin: 25px 0; /* adds gap below the table */
+        }
+
+        .pagination-container ul {
+          display: flex;
+          list-style: none;
+          gap: 8px;
+          padding: 0;
+          margin: 0;
+        }
+
+        .pagination-container li a,
+        .pagination-container li span {
+          display: block;
+          padding: 10px 16px;
+          border: 1px solid rgba(255,255,255,0.3);
+          border-radius: 8px;
+          background: rgba(255, 255, 255, 0.15);
+          backdrop-filter: blur(6px);
+          color: #fff;
+          font-size: 14px;
+          text-decoration: none;
+          transition: all 0.3s ease;
+        }
+
+        .pagination-container li a:hover {
+          background: #8f2c24;
+          color: #fff;
+          transform: translateY(-2px);
+        }
+
+        .pagination-container li.active span {
+          background: #f6871f;
+          color: #fff;
+          border-color: #8f2c24;
+          font-weight: bold;
+        }
+
+           /* Falling leaves animation */
+    .leaves {
+      position: absolute;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
+      pointer-events: none;
     }
+
+    .leaves .set {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+    }
+
+    .leaves .set div {
+      position: absolute;
+      display: block;
+    }
+
+    .leaves .set div:nth-child(1) { left: 20%; animation: animate 20s linear infinite; }
+    .leaves .set div:nth-child(2) { left: 50%; animation: animate 14s linear infinite; }
+    .leaves .set div:nth-child(3) { left: 70%; animation: animate 12s linear infinite; }
+    .leaves .set div:nth-child(4) { left: 5%;  animation: animate 15s linear infinite; }
+    .leaves .set div:nth-child(5) { left: 85%; animation: animate 18s linear infinite; }
+    .leaves .set div:nth-child(6) { left: 90%; animation: animate 12s linear infinite; }
+    .leaves .set div:nth-child(7) { left: 15%; animation: animate 14s linear infinite; }
+    .leaves .set div:nth-child(8) { left: 60%; animation: animate 15s linear infinite; }
+
+    @keyframes animate {
+      0%   { opacity: 0; top: -10%; transform: translateX(20px) rotate(0deg); }
+      10%  { opacity: 1; }
+      20%  { transform: translateX(-20px) rotate(45deg); }
+      40%  { transform: translateX(-20px) rotate(90deg); }
+      60%  { transform: translateX(20px) rotate(180deg); }
+      80%  { transform: translateX(-20px) rotate(45deg); }
+      100% { top: 110%; transform: translateX(20px) rotate(225deg); }
+    }
+
   </style>
 </head>
 <body>
   <section>
+    <!-- Falling Leaves -->
+    <div class="leaves">
+      <div class="set">
+        <div><img src="/public/images/leaf_03.png"></div>
+        <div><img src="/public/images/leaf_02.png"></div>
+        <div><img src="/public/images/leaf_03.png"></div>
+        <div><img src="/public/images/leaf_04.png"></div>
+        <div><img src="/public/images/leaf_01.png"></div>
+        <div><img src="/public/images/leaf_02.png"></div>
+        <div><img src="/public/images/leaf_03.png"></div>
+        <div><img src="/public/images/leaf_04.png"></div>
+      </div>
+    </div>
     <img src="/public/images/bg.jpg" class="bg">
     <img src="/public/images/trees.png" class="trees">
 
     <div class="glass-container">
       <h1>Students Info</h1>
 
-        <?php if(!empty($logged_in_user)): ?>
-        <p style="color: blue;">
-        Logged in as: <?= html_escape($logged_in_user['username']); ?> (<?= html_escape($logged_in_user['role']); ?>)
-        </p>
-        <?php else: ?>
-        <p style="color: red;">Logged in user not found</p>
-        <?php endif; ?>
+      <?php if(!empty($logged_in_user)): ?>
+        <div class="user-status">
+          <strong>Welcome:</strong> 
+          <span class="username"><?= html_escape($logged_in_user['username']); ?></span>
+        </div>
+      <?php else: ?>
+        <div class="user-status error">
+          Logged in user not found
+        </div>
+      <?php endif; ?>
+
 
       <div class="top-bar">
         <a href="<?=site_url('auth/logout'); ?>"><button class="logout-btn">Logout</button></a>
@@ -261,14 +424,16 @@
           <button type="submit">Search</button>  
         </form>
       </div>
-
+      <div class="table-responsive">
       <table>
         <tr>
           <th>ID</th>
           <th>Name</th>
           <th>Email</th>
-          <th>Password</th>
-          <th>Role</th>
+          <?php if ($logged_in_user['role'] === 'admin'): ?>
+            <th>Password</th>
+            <th>Role</th>
+          <?php endif; ?>
           <th>Action</th>
         </tr>
         <?php foreach ($users as $user): ?>
@@ -276,8 +441,10 @@
           <td><?=html_escape($user['id']); ?></td>
           <td><?=html_escape($user['username']); ?></td>
           <td><?=html_escape($user['email']); ?></td>
-          <td>*******</td>
-          <td><?=html_escape($user['role']); ?></td>
+            <?php if ($logged_in_user['role'] === 'admin'): ?>
+              <td>*******</td>
+              <td><?= html_escape($user['role']); ?></td>
+            <?php endif; ?>
           <td>
             <a href="<?=site_url('/users/update/'.$user['id']);?>">Update</a>
             <a href="<?=site_url('/users/delete/'.$user['id']);?>">Delete</a>
@@ -286,8 +453,12 @@
         <?php endforeach; ?>
 
       </table>
+      </div>
 
-      <?php echo $page; ?>
+      <div class="pagination-container">
+        <?php echo $page; ?>
+      </div>
+
 
       <div class="button-container">
         <a href="<?=site_url('users/create'); ?>" class="btn-create">+ Create New User</a>
