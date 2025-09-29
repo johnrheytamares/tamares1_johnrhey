@@ -448,10 +448,11 @@
               <td>*******</td>
               <td><?= html_escape($user['role']); ?></td>
           <td>
+             <?php endif; ?>
             <a href="<?=site_url('/users/update/'.$user['id']);?>">Update</a>
             <a href="<?=site_url('/users/delete/'.$user['id']);?>">Delete</a>
           </td>
-          <?php endif; ?>
+         
         </tr>
         <?php endforeach; ?>
 
