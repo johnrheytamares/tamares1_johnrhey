@@ -447,8 +447,8 @@
             <?php if ($logged_in_user['role'] === 'admin'): ?>
               <td>*******</td>
               <td><?= html_escape($user['role']); ?></td>
-          <td>
              <?php endif; ?>
+          <td>
             <a href="<?=site_url('/users/update/'.$user['id']);?>">Update</a>
             <a href="<?=site_url('/users/delete/'.$user['id']);?>">Delete</a>
           </td>
