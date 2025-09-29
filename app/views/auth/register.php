@@ -203,10 +203,10 @@
                     style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #8f2c24;"></i>
                 </div>
 
-                <select name="role" required>
+                <!--<select name="role" required>
                     <option value="user" selected>User</option>
                     <option value="admin">Admin</option>
-                </select>
+                </select>-->
 
                 <button type="submit" id="btn">Register</button>
             </form>

@@ -12,8 +12,8 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
         {
             parent::__construct();
         }
-        public function index()
-{
+    public function index()
+    {
     $this->call->model('UsersModel');
 
     // Check kung may naka-login
@@ -59,7 +59,7 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 
     // ✅ Pass only cleaned data to view
     $this->call->view('users/index', $data);
-}
+    }
 
 
     public function create()
@@ -158,12 +158,13 @@ public function update($id)
         if ($this->io->method() == 'post') {
             $username = $this->io->post('username');
             $password = password_hash($this->io->post('password'), PASSWORD_BCRYPT);
+            $role = 'user'; // default role
 
             $data = [
                 'username' => $username,
                 'email'    => $this->io->post('email'),
                 'password' => $password,
-                'role'     => $this->io->post('role'),
+                'role'     => $role,
                 'created_at' => date('Y-m-d H:i:s')
             ];
 

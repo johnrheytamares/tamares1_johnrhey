@@ -402,7 +402,10 @@
     <img src="/public/images/trees.png" class="trees">
 
     <div class="glass-container">
-      <h1>Students Info</h1>
+      <h1>
+    <?= ($logged_in_user['role'] === 'admin') ? 'Admin Dashboard' : 'User Dashboard'; ?>
+      </h1>
+
 
       <?php if(!empty($logged_in_user)): ?>
         <div class="user-status">
@@ -444,11 +447,11 @@
             <?php if ($logged_in_user['role'] === 'admin'): ?>
               <td>*******</td>
               <td><?= html_escape($user['role']); ?></td>
-            <?php endif; ?>
           <td>
             <a href="<?=site_url('/users/update/'.$user['id']);?>">Update</a>
             <a href="<?=site_url('/users/delete/'.$user['id']);?>">Delete</a>
           </td>
+          <?php endif; ?>
         </tr>
         <?php endforeach; ?>
 
@@ -461,7 +464,9 @@
 
 
       <div class="button-container">
+        <?php if ($logged_in_user['role'] === 'admin'): ?>
         <a href="<?=site_url('users/create'); ?>" class="btn-create">+ Create New User</a>
+         <?php endif; ?>
       </div>
     </div>
   </section>
