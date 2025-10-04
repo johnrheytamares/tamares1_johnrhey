@@ -111,18 +111,20 @@
       background: #d64c42;
     }
 
-    .group {
+    .login .group {
+      display: flex;
+      justify-content: space-between;
       text-align: center;
     }
 
-    .group a {
-      font-size: 1em;
+    .login .group a {
+      font-size: 1.25em;
       color: #8f2c24;
       font-weight: 500;
       text-decoration: none;
     }
 
-    .group a:hover {
+    .login .group a:nth-child(2) {
       text-decoration: underline;
     }
 
