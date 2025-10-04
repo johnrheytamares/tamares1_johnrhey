@@ -52,8 +52,7 @@
             flex-direction: column;
             gap: 20px;
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
-            z-index: 200;
-            
+            z-index:200;
         }
 
         .login h2 {
@@ -98,19 +97,20 @@
         .login .inputBox #btn:hover {
             background: #d64c42;
         }
+
         .group {
-          text-align: center;
+        text-align: center;
         }
-    
+
         .group a {
-          font-size: 1em;
-          color: #8f2c24;
-          font-weight: 500;
-          text-decoration: none;
+        font-size: 1em;
+        color: #8f2c24;
+        font-weight: 500;
+        text-decoration: none;
         }
-    
+
         .group a:hover {
-          text-decoration: underline;
+        text-decoration: underline;
         }
 
         .leaves {
@@ -186,19 +186,19 @@
                 <input type="email" name="email" placeholder="Email" required>
 
                 <!-- Password field -->
-                <div style="position: relative; margin-bottom: 20px;">
+                <div style="position: relative;">
                     <input type="password" id="password" name="password" placeholder="Password" required 
                         style="width: 100%; padding: 15px 45px 15px 20px; border-radius: 5px; border: none; font-size: 1.1em;">
                     <i class="fa-solid fa-eye" id="togglePassword" 
-                    style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #8f2c24;"></i>
+                    style="position: absolute; right: 15px; top: 35%; transform: translateY(-50%); cursor: pointer; color: #8f2c24;"></i>
                 </div>
 
                 <!-- Confirm Password field -->
-                <div style="position: relative; margin-bottom: 20px;">
+                <div style="position: relative;">
                     <input type="password" id="confirmPassword" name="confirm_password" placeholder="Confirm Password" required 
                         style="width: 100%; padding: 15px 45px 15px 20px; border-radius: 5px; border: none; font-size: 1.1em;">
                     <i class="fa-solid fa-eye" id="toggleConfirmPassword" 
-                    style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #8f2c24;"></i>
+                    style="position: absolute; right: 15px; top: 35%; transform: translateY(-50%); cursor: pointer; color: #8f2c24;"></i>
                 </div>
 
                 <!--<select name="role" required>
