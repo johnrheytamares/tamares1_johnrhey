@@ -51,6 +51,7 @@
       flex-direction: column;
       gap: 20px;
       box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+      z-index: 200;
     }
 
     .form-container h1 {
@@ -212,7 +213,10 @@
         <div class="form-group">
           <input type="email" name="email" value="<?=html_escape($user['email']);?>" placeholder="Email" required>
         </div>
-        
+        <div class="form-group" style="position: relative;">
+          <input type="password" placeholder="Password" name="password" id="password">
+          <i class="fa-solid fa-eye toggle-password" id="togglePassword"></i>
+        </div>
       <?php if(!empty($logged_in_user) && $logged_in_user['role'] === 'admin'): ?>
           <div class="form-group">
               <select name="role" required>
@@ -221,10 +225,7 @@
               </select>
           </div>
 
-        <div class="form-group" style="position: relative;">
-          <input type="password" placeholder="Password" name="password" id="password" required>
-          <i class="fa-solid fa-eye toggle-password" id="togglePassword"></i>
-        </div>
+
       <?php endif; ?>
 
         <button type="submit" class="btn-submit">Update User</button>

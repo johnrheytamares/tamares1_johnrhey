@@ -74,23 +74,27 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 
     public function create()
     {
-        if($this->io->method() === 'post'){
+        $this->call->model('UsersModel'); // load model
+
+        if ($this->io->method() == 'post') {
             $username = $this->io->post('username');
-            $email = $this->io->post('email');  
+            $password = password_hash($this->io->post('password'), PASSWORD_BCRYPT);
+            //$role = 'user'; // default role
 
             $data = [
                 'username' => $username,
-                'email' => $email
+                'email'    => $this->io->post('email'),
+                'password' => $password,
+                'role'     => $this->io->post('role'), // get role from form
+                'created_at' => date('Y-m-d H:i:s')
             ];
 
-            if($this->UsersModel->insert($data)){
+            if ($this->UsersModel->insert($data)) {
                 redirect('/users');
-            } else {
-                echo 'Failed to create user.';
             }
-        }else{
-           $this->call->view('users/create');
         }
+
+        $this->call->view('/users/create');
         
     }
 
@@ -115,26 +119,31 @@ public function update($id)
     if ($this->io->method() === 'post') {
         $username = $this->io->post('username');
         $email = $this->io->post('email');
+        $password = $this->io->post('password');
 
         // Only allow admin to update role and password
         if (!empty($logged_in_user) && $logged_in_user['role'] === 'admin') {
             $role = $this->io->post('role');
-            $password = $this->io->post('password');
+            
             $data = [
                 'username' => $username,
                 'email' => $email,
                 'role' => $role,
             ];
 
-            if (!empty($password)) {
-                $data['password'] = password_hash($password, PASSWORD_BCRYPT);
-            }
+
         } else {
             // Normal users can only update username and email
             $data = [
                 'username' => $username,
-                'email' => $email
+                'email' => $email,
+
+
             ];
+        }
+
+        if (!empty($password)) {
+            $data['password'] = password_hash($password, PASSWORD_BCRYPT);
         }
 
         if ($this->UsersModel->update($id, $data)) {

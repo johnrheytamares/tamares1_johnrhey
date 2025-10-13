@@ -421,11 +421,13 @@
 
       <div class="top-bar">
         <a href="<?=site_url('auth/logout'); ?>"><button class="logout-btn">Logout</button></a>
+        <?php if ($logged_in_user['role'] === 'admin'): ?>
         <form action="<?=site_url('users');?>" method="get" class="search-form">
           <?php $q = isset($_GET['q']) ? $_GET['q'] : ''; ?>
           <input name="q" type="text" placeholder="Search" value="<?=html_escape($q);?>">
           <button type="submit">Search</button>  
         </form>
+        <?php endif; ?>
       </div>
       <div class="table-responsive">
       <table>
@@ -450,7 +452,9 @@
              <?php endif; ?>
           <td>
             <a href="<?=site_url('/users/update/'.$user['id']);?>">Update</a>
-            <a href="<?=site_url('/users/delete/'.$user['id']);?>">Delete</a>
+            <?php if ($logged_in_user['role'] === 'admin'): ?>
+              <a href="<?=site_url('/users/delete/'.$user['id']);?>">Delete</a>
+            <?php endif; ?>
           </td>
          
         </tr>
