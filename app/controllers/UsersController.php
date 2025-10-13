@@ -72,31 +72,44 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
         }
 
 
-    public function create()
-    {
-        $this->call->model('UsersModel'); // load model
+        public function create()
+        {
+            $this->call->model('UsersModel'); // load model
 
-        if ($this->io->method() == 'post') {
-            $username = $this->io->post('username');
-            $password = password_hash($this->io->post('password'), PASSWORD_BCRYPT);
-            //$role = 'user'; // default role
+            $error = null; // error message container
 
-            $data = [
-                'username' => $username,
-                'email'    => $this->io->post('email'),
-                'password' => $password,
-                'role'     => $this->io->post('role'), // get role from form
-                'created_at' => date('Y-m-d H:i:s')
-            ];
+            if ($this->io->method() == 'post') {
+                $username = trim($this->io->post('username'));
+                $email = trim($this->io->post('email'));
+                $password = password_hash($this->io->post('password'), PASSWORD_BCRYPT);
+                $role = $this->io->post('role');
 
-            if ($this->UsersModel->insert($data)) {
-                redirect('/users');
+                // ✅ Check if username or email already exists
+                $existing_user = $this->UsersModel->get_user_by_username($username);
+                $existing_email = $this->UsersModel->get_user_by_email($email);
+
+                if ($existing_user || $existing_email) {
+                    $error = "User with the same username or email already exists!";
+                } else {
+                    $data = [
+                        'username' => $username,
+                        'email'    => $email,
+                        'password' => $password,
+                        'role'     => $role,
+                        'created_at' => date('Y-m-d H:i:s')
+                    ];
+
+                    if ($this->UsersModel->insert($data)) {
+                        redirect('/users');
+                    } else {
+                        $error = "Failed to create user. Please try again.";
+                    }
+                }
             }
+
+            $this->call->view('/users/create', ['error' => $error]);
         }
 
-        $this->call->view('/users/create');
-        
-    }
 
 public function update($id)
 {
@@ -174,26 +187,40 @@ public function update($id)
     {
         $this->call->model('UsersModel'); // load model
 
+        $error = null;
+
         if ($this->io->method() == 'post') {
-            $username = $this->io->post('username');
+            $username = trim($this->io->post('username'));
+            $email = trim($this->io->post('email'));
             $password = password_hash($this->io->post('password'), PASSWORD_BCRYPT);
             $role = 'user'; // default role
 
-            $data = [
-                'username' => $username,
-                'email'    => $this->io->post('email'),
-                'password' => $password,
-                'role'     => $role,
-                'created_at' => date('Y-m-d H:i:s')
-            ];
+            // ✅ Check if username or email already exists
+            $existing_user = $this->UsersModel->get_user_by_username($username);
+            $existing_email = $this->UsersModel->get_user_by_email($email);
 
-            if ($this->UsersModel->insert($data)) {
-                redirect('/auth/login');
+            if ($existing_user || $existing_email) {
+                $error = "That username or email is already taken!";
+            } else {
+                $data = [
+                    'username' => $username,
+                    'email'    => $email,
+                    'password' => $password,
+                    'role'     => $role,
+                    'created_at' => date('Y-m-d H:i:s')
+                ];
+
+                if ($this->UsersModel->insert($data)) {
+                    redirect('/auth/login');
+                } else {
+                    $error = "Registration failed. Please try again.";
+                }
             }
         }
 
-        $this->call->view('/auth/register');
+        $this->call->view('/auth/register', ['error' => $error]);
     }
+
 
 
         public function login()

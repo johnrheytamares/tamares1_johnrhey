@@ -29,6 +29,14 @@ class UsersModel extends Model {
                         ->get();
     }
 
+    public function get_user_by_email($email)
+    {
+        return $this->db->table($this->table)
+                        ->where('email', $email)
+                        ->get();
+    }
+
+
     public function update_password($user_id, $new_password) {
     return $this->db->table($this->table)
                     ->where('id', $user_id)

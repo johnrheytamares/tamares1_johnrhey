@@ -181,6 +181,23 @@
         <!-- Register Form -->
         <div class="login">
             <h2>Register</h2>
+
+                <?php if (!empty($error)): ?>
+                <div style="
+                    background-color: #f8d7da;
+                    color: #842029;
+                    padding: 12px 16px;
+                    border: 1px solid #f5c2c7;
+                    border-radius: 6px;
+                    margin-bottom: 16px;
+                    margin-top: 10px;
+                    text-align: center;
+                    font-size: 15px;
+                ">
+                    <?= htmlspecialchars($error) ?>
+                </div>
+                <?php endif; ?>
+                
             <form method="POST" action="<?= site_url('auth/register'); ?>" class="inputBox">
                 <input type="text" name="username" placeholder="Username" required>
                 <input type="email" name="email" placeholder="Email" required>
